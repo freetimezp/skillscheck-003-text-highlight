@@ -1,18 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Test your HTML and CSS text highlighting skills with 20 interactive questions."
+        />
+        <meta name="theme-color" content="#10110f" />
+        <title>003 — Text Highlight Skills Check</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Project</title>
-</head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
 
-<body>
-    start
+        <link rel="stylesheet" href="./assets/css/style.css" />
+    </head>
+    <body>
+        <header class="topbar">
+            <a class="brand" href="./">SKILLS<span>CHECK</span></a>
+            <span class="topbar-label">HTML / 003</span>
+            <span class="status">
+                <span class="status-dot"></span> KNOWLEDGE TEST
+            </span>
+        </header>
 
-    <script src="./assets/js/main.js"></script>
-</body>
+        <main class="app">
+            <section class="intro">
+                <p class="eyebrow">HTML & CSS / LESSON 003</p>
+                <h1>READ BETWEEN<br />THE <span>HIGHLIGHTS.</span></h1>
 
+                <p class="intro-copy">
+                    Twenty questions. Two question types. One chance to prove
+                    you understand how meaningful text meets visual design.
+                </p>
+
+                <div class="topic-list">
+                    <span>&lt;mark&gt;</span>
+                    <span>&lt;span&gt;</span>
+                    <span>color</span>
+                    <span>background-color</span>
+                    <span>contrast</span>
+                </div>
+            </section>
+
+            <section class="quiz-card" id="quiz" aria-labelledby="questionText">
+                <div class="quiz-topline">
+                    <span class="eyebrow" id="questionCounter">
+                        QUESTION 01 / 20
+                    </span>
+                    <span class="score-display">
+                        SCORE <strong id="score">0</strong>
+                    </span>
+                </div>
+
+                <div class="progress-track" aria-hidden="true">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div class="question-meta">
+                    <span class="question-type" id="questionType">
+                        SINGLE ANSWER
+                    </span>
+                    <span class="question-points">+1 POINT</span>
+                </div>
+
+                <h2 id="questionText">Loading question...</h2>
+                <p class="question-hint" id="questionHint">
+                    Choose the best answer.
+                </p>
+
+                <pre
+                    class="code-example"
+                    id="codeExample"
+                    hidden
+                ><code id="codeText"></code></pre>
+
+                <div
+                    class="options"
+                    id="options"
+                    role="group"
+                    aria-labelledby="questionText"
+                ></div>
+
+                <p class="feedback" id="feedback" aria-live="polite" hidden></p>
+
+                <div class="quiz-actions">
+                    <span class="keyboard-hint">
+                        TAKE YOUR TIME. THINK CLEARLY.
+                    </span>
+
+                    <button id="checkButton" type="button" disabled>
+                        Check answer <span>↗</span>
+                    </button>
+
+                    <button id="nextButton" type="button" hidden>
+                        Next question <span>→</span>
+                    </button>
+                </div>
+            </section>
+
+            <section
+                class="result-card"
+                id="results"
+                hidden
+                aria-labelledby="resultTitle"
+            >
+                <p class="eyebrow">ASSESSMENT COMPLETE / 003</p>
+                <h2 id="resultTitle">YOUR RESULTS.</h2>
+
+                <div class="result-score">
+                    <span id="finalScore">0</span>
+                    <span class="result-total">/ 20</span>
+                </div>
+
+                <p class="result-message" id="resultMessage"></p>
+
+                <div class="result-stats">
+                    <div>
+                        <span class="stat-label">ACCURACY</span>
+                        <strong id="accuracy">0%</strong>
+                    </div>
+                    <div>
+                        <span class="stat-label">CORRECT</span>
+                        <strong id="correctCount">0 / 20</strong>
+                    </div>
+                    <div>
+                        <span class="stat-label">RESULT</span>
+                        <strong id="resultGrade">—</strong>
+                    </div>
+                </div>
+
+                <button class="restart-button" id="restartButton" type="button">
+                    Try again <span>↻</span>
+                </button>
+            </section>
+
+            <footer class="page-footer">
+                <div>
+                    <span class="footer-mark">003</span>
+                    <span>HTML LEARNING ROADMAP</span>
+                </div>
+                <a
+                    href="https://freetimezp.github.io/school-003-text-highlight/"
+                >
+                    REVIEW LESSON ↗
+                </a>
+            </footer>
+        </main>
+
+        <script type="module" src="./assets/js/main.js"></script>
+    </body>
 </html>
