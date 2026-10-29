@@ -331,8 +331,8 @@
 
     const SKILL_RESULTS_KEY = "freetimezp:roadmap:skill-check-results:v1";
 
-    const SKILL_TEST_ID = "001";
-    const SKILL_TEST_TITLE = "HTML Headings";
+    const SKILL_TEST_ID = "003";
+    const SKILL_TEST_TITLE = "HTML Text Highlight";
 
     let resultSaved = false;
 
