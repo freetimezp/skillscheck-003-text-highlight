@@ -324,6 +324,70 @@
     let answered = false;
     let selectedOptions = new Set();
 
+    /* =========================================
+        SHARED ROADMAP RESULTS
+        This format is also used by the other skill checks.
+    ========================================= */
+
+    const SKILL_RESULTS_KEY = "freetimezp:roadmap:skill-check-results:v1";
+
+    const SKILL_TEST_ID = "001";
+    const SKILL_TEST_TITLE = "HTML Headings";
+
+    let resultSaved = false;
+
+    function saveSkillCheckResult(score, total, percentage) {
+        try {
+            const stored = localStorage.getItem(SKILL_RESULTS_KEY);
+            const data = stored ? JSON.parse(stored) : {};
+
+            const tests =
+                data.tests && typeof data.tests === "object" ? data.tests : {};
+
+            const previous = tests[SKILL_TEST_ID] || {};
+            const completedAt = new Date().toISOString();
+
+            const attempt = {
+                score,
+                total,
+                percentage,
+                completedAt,
+            };
+
+            const previousBest = previous.best;
+
+            const best =
+                !previousBest || percentage >= previousBest.percentage
+                    ? attempt
+                    : previousBest;
+
+            const history = Array.isArray(previous.history)
+                ? previous.history
+                : [];
+
+            tests[SKILL_TEST_ID] = {
+                testId: SKILL_TEST_ID,
+                title: SKILL_TEST_TITLE,
+                attempts: (Number(previous.attempts) || 0) + 1,
+                latest: attempt,
+                best,
+                history: [...history, attempt].slice(-10),
+            };
+
+            localStorage.setItem(
+                SKILL_RESULTS_KEY,
+                JSON.stringify({
+                    schemaVersion: 1,
+                    updatedAt: completedAt,
+                    tests,
+                }),
+            );
+        } catch (error) {
+            // The quiz still works if browser storage is unavailable.
+            console.warn("Could not save skill-check results:", error);
+        }
+    }
+
     // Fisher-Yates shuffle: returns a shuffled copy of an array.
     function shuffle(items) {
         const result = [...items];
@@ -530,6 +594,11 @@
                 "Every attempt helps. Review mark, span, color, and background-color, then retry.";
         }
 
+        if (!resultSaved) {
+            saveSkillCheckResult(score, total, percentage);
+            resultSaved = true;
+        }
+
         elements.resultGrade.textContent = grade;
         elements.resultMessage.textContent = message;
 
@@ -548,6 +617,8 @@
     }
 
     function startQuiz() {
+        resultSaved = false;
+
         quizQuestions = prepareQuestions();
         currentIndex = 0;
         score = 0;
